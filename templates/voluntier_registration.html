@@ -1,0 +1,115 @@
+{% extends "bootstrap/base.html" %}
+
+{% block title %}Voluntier Registration{% endblock %}
+
+{% block styles %}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="{{url_for("static", filename="styles.css" )}}">
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+
+    <div class="profile-header"></div>
+    <div class="avatar">
+        <img class="avatar-img" src="https://www.w3schools.com/howto/img_avatar.png" alt="user" />
+    </div>
+
+<!-- Login Form -->
+<div class="form">
+<form method="POST" enctype = "multipart/form-data">
+    <div class="row">
+    {{ form.hidden_tag() }}
+        <div class="col-md-6 px-3">
+            <div class="input-group mt-5">
+                {{form.name(class_="form-control form-field", placeholder="Name")}}
+                <span class="input-group-text form-field-right" id="basic-addon"><i class="fa fa-user-circle"></i></span>
+            </div>
+        </div>
+        <div class="col-md-6 px-3">
+            <div class="input-group mt-5">
+                {{form.email(class_="form-control form-field", placeholder="Email")}}
+                <span class="input-group-text form-field-right" id="basic-addon"><i class="fa fa-envelope"></i></span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 px-3">
+            <div class="input-group mt-5">
+                {{form.mob(class_="form-control form-field", placeholder="Mobile")}}
+                <span class="input-group-text form-field-right" id="basic-addon"><i class="fa fa-envelope"></i></span>
+            </div>
+        </div>
+        <div class="col-md-6 px-3">
+            <div class="input-group mt-5">
+                {{form.quallifaications(class_="form-control form-field", placeholder="Quallifaications")}}
+                <span class="input-group-text form-field-right" id="basic-addon"><i class="fa fa-envelope"></i></span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 px-3">
+            <div class="input-group mt-5">
+                {{form.state(class="form-control form-field", placeholder="State")}}
+                <span class="input-group-text form-field-right" id="basic-addon"><i class="fa fa-envelope"></i></span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 px-3">
+            <div class="input-group mt-5">
+            {{form.district(class="form-control form-field", placeholder="District")}}
+            <span class="input-group-text form-field-right" id="basic-addon"><i class="fa fa-envelope"></i></span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 px-3">
+                <div class="input-group mt-5">
+                    {{form.password(class="form-control form-field", placeholder="Password")}}
+                    <span class="input-group-text form-field-right" id="basic-addon"><i class="fa fa-envelope"></i></span>
+                </div>
+        </div>
+        <div class="col-md-6 px-3">
+            <div class="input-group mt-5">
+                {{form.confirm(class="form-control form-field", placeholder="Confirm Password")}}
+                <span class="input-group-text form-field-right" id="basic-addon"><i class="fa fa-envelope"></i></span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 px-3">
+            <div class="input-group mt-5">
+                {{form.bio(class="form-control form-field", placeholder="Bio")}}
+                <span class="input-group-text form-field-right" id="basic-addon"><i class="fa fa-envelope"></i></span>
+            </div>
+        </div>
+        <div class="col-md-6 px-3">
+            <div class="input-group mt-5">
+                {{form.gov_doc(class="form-control form-field", placeholder="Upload Aadhar")}}
+                <span class="input-group-text form-field-right" id="basic-addon"><i class="fa fa-envelope"></i></span>
+            </div>
+        </div>
+    </div>
+    <div class="input-group col-md-7 mt-5 px-3">
+        <button type="submit" class="btn text-white button-global">Submit</button>
+    </div>
+</form>
+</div>
+
+<!-- Flashing -->
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+<ul class=flashes>
+    {% for message in messages %}
+    <li>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+{% endwith %}
+
+{% endblock %}
+
