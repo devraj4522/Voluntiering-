@@ -1,7 +1,116 @@
-<form action="/charge" method="post">
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <!-- bootstrap -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+      crossorigin="anonymous"
+    />
+
+    <!-- tachyons -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/tachyons@4.12.0/css/tachyons.min.css"
+    />
+
+    <!-- fontawesome -->
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.15.3/css/all.css"
+      integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk"
+      crossorigin="anonymous"
+    />
+
+    <link rel="stylesheet" href="{{url_for("static", filename="styles.css")}}" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="row mt-3">
+        <div class="col-1">
+
+          <!---------------- SIDEBAR START--------------------- -->
+
+          <div class="side-bar mt-4 ml-2 ">
+            <ul>
+              <a href="{{url_for("voluntiers_map")}}"
+                ><li class="pb-4 x pt-5"><i class="fas fa-user-alt"></i></li
+              ></a>
+              <a href="{{url_for("index")}}"
+                ><li class="pb-4 x"><i class="fas fa-home"></i></li
+              ></a>
+              <a href="{{url_for("signup")}}"
+                ><li class="pb-4 x"><i class="fas fa-hands-helping"></i></i></li
+              ></a>
+              <a href="{{url_for("voluntier_register")}}"
+                ><li class="x"><i class="fas fa-hand-holding-usd"></i></li
+              ></a>
+            </ul>
+          </div>
+<!-------------------------------------- SIDEBAR ENDS-------------------------------- -->
+
+        </div>
+        <div class="col-11">
+          <div class="row">
+            <div class="col-lg-4 col-md-6 col-12 grow">
+              <div class="card" style="width: 18rem">
+                <img
+                  src="https://images.unsplash.com/photo-1587316745621-3757c7076f7b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8vd258ZW58MHx8MHx8&auto=format&fit=crop&w=600&q=60"
+                  class="card-img-top"
+                  alt="..."
+                />
+                <div class="card-body">
+                  <p class="card-text">Corona Case In Your State <br />12345</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-12 grow">
+              <div class="card" style="width: 18rem">
+                <img
+                  src="https://images.unsplash.com/photo-1587459450937-8402ffa769cd?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTJ8fGNvcm9uYXZpcnVzfGVufDB8MnwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60"
+                  class="card-img-top"
+                  alt="..."
+                />
+                <div class="card-body">
+                  <p class="card-text">
+                    Corona Case In Your Country<br />123456
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-12 grow">
+              <div class="card" style="width: 18rem">
+                <img
+                  src="https://media.istockphoto.com/photos/coronavirus-quarantine-in-new-delhi-picture-id1213726746?k=6&m=1213726746&s=612x612&w=0&h=q4fGD16MxPSkcW5Wc-IOsxb9_Swoz9MK2T16BsFBkCI="
+                  class="card-img-top"
+                  alt="..."
+                />
+                <div class="card-body">
+                  <p class="card-text">
+                    Corona Case Across Globe<br />12345678
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mt-5">
+            <div class="col-6 ow" id="header">
+              <h2 class="tc underline">Wanna Help Someone!!</h2>
+              <br />
+              <h5>Life is not accumulation, it is about contribution.</h5>
+              No one has ever become poor by giving. When courage, genius, and generosity hold hands, all things are possible. It is more rewarding to watch money change the world than to watch it accumulate.
+              <div class="mt-3 mb-5">
+                <a href="" class="btn-get-started"  id="btn"> Get Started </a>
+              </div>
+              <form action="/charge" method="post">
 <article>
 	<label>
-		<span>Amount is $5.00</span>
 	</label>
 </article>
 
@@ -12,3 +121,60 @@
           data-locale="auto">
 </script>
 </form>
+
+            </div>
+            <div class="col-6">
+              <a
+                class="db center mw5 black link dim"
+                title="Frank Ocean's Blonde on Apple Music"
+                href="https://geo.itunes.apple.com/us/album/blonde/id1146195596?at=1l3vqFJ&mt=1&app=music"
+              >
+                <img class="db ba b--black-10"/ alt="Frank Ocean Blonde Album
+                Cover"
+                src="https://images.unsplash.com/photo-1498183598268-bc8dbd3ef884?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1050&q=80"
+                >
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+
+<!------------------ popup section------------------ -->
+    <div class="bg-model">
+<div class="model-content">
+  <div class="close">+</div>
+  <img src="https://png.pngtree.com/png-vector/20190321/ourmid/pngtree-vector-users-icon-png-image_856952.jpg" alt="img" height="80" width="70">
+  <form action="">
+    <label for="">How much do you wanna contribute?</label><input type="text" placeholder="$">
+       <input type="email" placeholder="E-mail">
+     
+<a href="" class="btn-get-started">Contribute</a>
+  </form>
+</div>
+    </div>
+<!------------------ popup section------------------ -->
+
+
+
+<script type="text/javascript">
+ document.querySelector('.bg-model').style.display='none';
+ document.getElementById('btn').addEventListener('click', function(){
+  document.querySelector('.bg-model').style.display='flex';
+  console.log('clicked');
+})
+document.querySelector('.close').addEventListener('click', function(){
+  document.querySelector('.bg-model').style.display='none';
+  console.log('closed');
+})
+</script>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

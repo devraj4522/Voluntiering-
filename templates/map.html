@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,6 +12,7 @@
     integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
     crossorigin="anonymous"
     />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -30,75 +33,86 @@
 </head>
 <body>
     <div id="map"></div>
+    <script>
+        function initMap(){
+
+            var options = {
+                center: {lat: 17.3850, lng: 78.4867},
+                zoom: 8
+            };
+        
+            map = new google.maps.Map(document.getElementById("map"), options);
+        
+            function addMarker(props){       
+        
+                function geocode(){
+        
+                    // var location = 'Pipeline Road Jeedimetla'
+                    axios.get('https://maps.googleapis.com/maps/api/geocode/json', {
+                        params:{
+                            address: props.location,
+                            key: 'AIzaSyBW6h79fYNNzye0-Q-1pxcicyeYBlg2_9A'
+                        }
+                    })
+                    .then(function(response){
+                        const marker = new google.maps.Marker({
+                            position: response.data.results[0].geometry.location,
+                            map:map, 
+                            icon:props.imgIcon
+                        });
+                        
+                        if(props.imgIcon){
+                            marker.setIcon(props.imgIcon);
+                        }
+                        
+                        if(props.content){
+                            
+                            const detailWindow = new google.maps.InfoWindow({
+                                content:props.content
+                            });
+                        
+                            marker.addListener("mouseover", () => {
+                                detailWindow.open(map, marker);
+                            });
+                        }
+                    })
+                    .catch(function(error){
+                        console.log(error);
+                    })
+        
+                    
+        
+                }  
+                geocode();
+        
+            }
+        
+            addMarker({
+                location:'Pipeline road Jeedimetla',
+                imgIcon:"https://img.icons8.com/nolan/64/street-view.png",
+                content: `<h2>Vaibhav</h2>`
+            });
+            
+            {% for voluntier in voluntiers %}
+            var voluntier_id = {{voluntier.id}};
+            addMarker({
+                location: `{{voluntier.state}}, {{voluntier.district}}`,
+                imgIcon:"https://img.icons8.com/nolan/64/street-view.png",
+                content: `<h2>{{voluntier.name}}</h2>
+                          <form class="Login-form" method="POST">
+                            {{ form.hidden_tag() }}
+                            {{form.voluntier(class_="form-control text-center msg-user mb-2", placeholder="id", value='${voluntier_id}')}}
+                            {{form.message(class="form-control text-center msg-field mb-2", placeholder="message")}}
+                            <button type="submit" class="btn button-contact">Submit</button>
+                          </form>
+                        `
+                });
+            {% endfor %}
+        }
+        
+    </script>
     <script async
         src="https://maps.googleapis.com/maps/api/js?key={{key}}&callback=initMap">
-    </script>
-    <script>
-    function initMap(){
-
-    var options = {
-        center: {lat: 17.3850, lng: 78.4867},
-        zoom: 8
-    };
-
-    map = new google.maps.Map(document.getElementById("map"), options);
-
-
-    function addMarker(props){
-
-        const marker = new google.maps.Marker({
-            position:props.location,
-            map:map, 
-            icon:props.imgIcon
-        });
-
-        if(props.imgIcon){
-            marker.setIcon(props.imgIcon);
-        }
-
-        if(props.content){
-            
-            const detailWindow = new google.maps.InfoWindow({
-                content:props.content
-            });
-    
-            marker.addListener("mouseover", () => {
-                detailWindow.open(map, marker);
-            });
-        }
-
-
-    }
-
-    
-
-    addMarker({
-        location:{lat: 37.7749, lng: -122.4194},
-        imgIcon:"https://img.icons8.com/nolan/64/street-view.png",
-        content: `<h2>Elon Musk</h2>`
-    });
-
-    addMarker({
-        location:{lat: 17.3850, lng: 78.4867},
-        imgIcon:"https://img.icons8.com/nolan/64/street-view.png",
-        content: `<h2>Vaibhav</h2>`
-    });
-    {% for voluntier in voluntiers %}
-    var voluntier_id = {{voluntier.id}};
-    addMarker({
-        location:{lat: 17.3850, lng: 78.4867},
-        imgIcon:"https://img.icons8.com/nolan/64/street-view.png",
-        content: `<h2>{{voluntier.name}}</h2>
-                  <form class="Login-form" method="POST">
-                    {{ form.hidden_tag() }}
-                    {{form.voluntier(class_="form-control text-center msg-user mb-2", placeholder="id", value='${voluntier_id}')}}
-                    {{form.message(class="form-control text-center msg-field mb-2", placeholder="message")}}
-                    <button type="submit" class="btn button-contact">Submit</button>
-                  </form>
-                `
-        });
-    {% endfor %}
-}
     </script>
 </body>
 </html>

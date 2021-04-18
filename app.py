@@ -26,6 +26,11 @@ def index():
     stripe_config = get_publishable_key(stripe_keys)
     return render_template("index.html", current_user = current_user, stripe_config=stripe_config)
 
+@app.route('/contributors', methods=['GET'])
+def contributors():
+    voluntiers = Voluntier.query.all()
+    return render_template("contributors.html", voluntiers=voluntiers)
+
 @app.route("/voluntiers-map", methods=["GET", "POST"])
 def voluntiers_map():
     key = os.environ['MAP_KEY']
