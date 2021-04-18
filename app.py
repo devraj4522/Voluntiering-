@@ -1,29 +1,81 @@
 from flask import Flask, render_template, url_for, request, redirect, flash
 from flask_login import LoginManager, current_user, logout_user, login_user, UserMixin 
-from forms import LoginForm, SignupForm, VoluntierRegistrationForm, FindFlight
+from forms import LoginForm, SignupForm, VoluntierRegistrationForm, MessgeForm
 from app_config import app
-from modals import db, User, Role, UserRole, Voluntier
+from modals import db, User, Role, UserRole, Voluntier, Message
 from werkzeug.utils import secure_filename
 import os
 import json
 from datetime import datetime, timedelta
+import stripe
+from stripe_pay import init_strip, get_publishable_key
 
 # Login
 login_manager = LoginManager()
 login_manager.init_app(app)
 
+# Stripe Init
+stripe_keys = init_strip()
+
 @login_manager.user_loader
 def load_user(id):
     return User.query.get(id)
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def index():
-    return render_template("index.html", current_user = current_user)
+    stripe_config = get_publishable_key(stripe_keys)
+    return render_template("index.html", current_user = current_user, stripe_config=stripe_config)
+
+@app.route("/voluntiers-map", methods=["GET", "POST"])
+def voluntiers_map():
+    key = os.environ['MAP_KEY']
+    voluntiers = Voluntier.query.all()
+    
+    # Message Voluntier:
+    form = MessgeForm()
+
+    if form.validate_on_submit():
+
+        # Just Testing stuffs
+        if not current_user.is_authenticated:
+            vol_id = request.form.get("voluntier")
+            msg = request.form.get("message")
+
+            voluntier = Voluntier.query.filter_by(id=vol_id).first()
+
+            if voluntier:
+                new_msg = Message(msg, voluntier)
+                db.session.add(new_msg)
+                db.session.commit()
+    
+    return render_template("map.html", key=key, voluntiers=voluntiers, form=form)
+
+@app.route('/charge', methods=['POST'])
+def charge():
+    # Amount in cents
+    amount = 500
+
+    customer = stripe.Customer.create(
+        email='customer@example.com',
+        source=request.form['stripeToken']
+    )
+
+    charge = stripe.Charge.create(
+        customer=customer.id,
+        amount=amount,
+        currency='inr',
+        description='Flask Charge'
+    )
+    return render_template('charge.html', amount=amount)
 
 
 @app.route('/voluntier-register', methods=["GET", "POST"])
 def voluntier_register():
     form = VoluntierRegistrationForm()
+    
+    if current_user.is_authenticated:
+        # Already Logged In
+        return redirect(url_for('index'))
 
     if form.validate_on_submit():
         # Get all data from html

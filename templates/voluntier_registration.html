@@ -10,17 +10,19 @@
 {% endblock %}
 
 {% block content %}
+<script>
 
+</script>
 <div class="container">
 
     <div class="profile-header"></div>
     <div class="avatar">
         <img class="avatar-img" src="https://www.w3schools.com/howto/img_avatar.png" alt="user" />
     </div>
-
+    <h1 style="position: relative;top: 93px;text-align: center;"> SignUp To Become A Crisis Voluntier </h1>
 <!-- Login Form -->
 <div class="form">
-<form method="POST" enctype = "multipart/form-data">
+<form method="POST" enctype= "multipart/form-data">
     <div class="row">
     {{ form.hidden_tag() }}
         <div class="col-md-6 px-3">
@@ -110,6 +112,7 @@
 </ul>
 {% endif %}
 {% endwith %}
+
 
 {% endblock %}
 

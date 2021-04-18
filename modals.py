@@ -71,7 +71,25 @@ class Voluntier(db.Model, UserMixin):
     def verify_password(self, pwd):
         return check_password_hash(self.password, pwd)
 
+class Message(db.Model):
+    __tablename__ = "message"
+    id = db.Column(db.Integer, primary_key=True)
+    msg = db.Column(db.String(520), nullable=False)
+
+    voluntier_id = db.Column(db.Integer, db.ForeignKey('voluntier.id'),
+        nullable=False)
+    voluntier = db.relationship('Voluntier',
+        backref=db.backref('messages', lazy=True))
+
+    def __init__(self, msg, voluntier):
+        self.msg = msg
+        self.voluntier = voluntier
+
+    def __repr__(self):
+        return '<Message %r>' % self.id
+
 # db.create_all()
+
 # new_role = Role(name='Voluntier')
 # db.session.add(new_role)
 # db.session.commit()

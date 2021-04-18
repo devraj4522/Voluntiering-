@@ -28,5 +28,6 @@ class VoluntierRegistrationForm(FlaskForm):
     password = PasswordField('New Password', [DataRequired(),EqualTo('confirm', message='Passwords must match')])
     confirm = PasswordField('Repeat Password')
 
-class FindFlight(FlaskForm):
-    from_place = StringField('From', validators=[DataRequired()])
+class MessgeForm(FlaskForm):
+    voluntier = StringField('voluntier', validators=[DataRequired()])
+    message = StringField('Message', validators=[DataRequired()])
