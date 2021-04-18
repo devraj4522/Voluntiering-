@@ -20,7 +20,7 @@ def create_app():
 def crete_datebase(app):
     # TODO: create a remote database
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
-    # app.config["SQLALCHEMY_DATABASE_URI"] = "mysql+pymysql://root:devraj@127.0.0.1:3306/travelogue"
+    # app.config["SQLALCHEMY_DATABASE_URI"] = "mysql+pymysql://root:devraj@127.0.0.1:3306/database"
     app.config['SECRET_KEY'] = os.getenv('secret')
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     db = SQLAlchemy(app)
