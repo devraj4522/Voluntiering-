@@ -1,2 +1,1 @@
-# Travelogue
-## ~ A submission to Vihaan
+# Hackdartmout Project
